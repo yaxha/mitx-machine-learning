@@ -9,3 +9,6 @@ Digit recognition (part 1): linear regression, SVM, softmax and PCA
 
 ## Project 3
 Digit recognition (part 2): feed-forward net and convolutional net with Pytorch
+
+## Project 4
+Rating prediction for Netflix movies: Naive Bayes and EM algorithm
