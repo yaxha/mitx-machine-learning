@@ -35,14 +35,14 @@ def epsilon_greedy(state_1, state_2, q_func, epsilon):
         (int, int): the indices describing the action/object to take
     """
     # Choose best action, regardless of epsilon
-    action_index, object_index = np.unravel_index(np.argmax(q_func[state_1,state_2,:, :]), 
+    action_i, object_i = np.unravel_index(np.argmax(q_func[state_1,state_2,:, :]), 
                                                     (NUM_ACTIONS, NUM_OBJECTS))
 
     # Now flip an epsilon-coin to decide if must select a random action
     if np.random.binomial(1, epsilon):
-        action_index, object_index = np.random.randint(NUM_ACTIONS, size=1), np.random.randint(NUM_OBJECTS, size=1)
+        action_i, object_i = np.random.randint(NUM_ACTIONS, size=1), np.random.randint(NUM_OBJECTS, size=1)
 
-    return (int(action_index), int(object_index))
+    return (int(action_i), int(object_i))
 
 
 # pragma: coderesponse end
@@ -107,10 +107,10 @@ def run_episode(for_training):
         current_quest_desc_i = dict_quest_desc[current_quest_desc]
 
         # Get next c
-        step += 1
         next_action_i, next_object_i = epsilon_greedy(current_room_desc_i, current_quest_desc_i, q_func, epsilon)
 
         # Make a move
+        step += 1
         next_room_desc, next_quest_desc, reward, terminal = framework.step_game(current_room_desc, current_quest_desc, next_action_i, next_object_i)
         next_room_desc_i = dict_room_desc[next_room_desc]
 

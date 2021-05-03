@@ -2,6 +2,7 @@ from string import punctuation, digits
 import csv
 import numpy as np
 import matplotlib.pyplot as plt
+import re
 
 import sys
 
@@ -46,9 +47,10 @@ def extract_words(input_string):
     Returns a list of lowercase words in the string.
     Punctuation and digits are separated out into their own words.
     """
-    for c in punctuation + digits:
-        input_string = input_string.replace(c, ' ' + c + ' ')
-    return input_string.lower().split()
+    #for c in punctuation + digits:
+    #    input_string = input_string.replace(c, ' ' + c + ' ')
+    #return input_string.lower().split()
+    return re.findall(r'\d|(?:[^\w\s])+|[^\W\d_]+', input_string.lower())
 
 
 def bag_of_words(texts):
